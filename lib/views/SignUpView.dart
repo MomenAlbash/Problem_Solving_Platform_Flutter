@@ -26,7 +26,7 @@ class _SignUpViewState extends State<SignUpView> {
         child: SingleChildScrollView(
           child: Column(
            children: [
-             mediumText(text: 'Welcome to SkillsOverFlow', color: yellowColor),
+             mediumText(text: 'Welcom to SkillsOverFlow', color: yellowColor),
              const SizedBox(height: 10,),
              smallText(text: 'log to your account', color: greyColor),
              const SizedBox(height: 30,),
