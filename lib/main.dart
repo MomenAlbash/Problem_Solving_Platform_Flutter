@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skills_over_flow_app/Simple_bloc_observer.dart';
 import 'package:skills_over_flow_app/views/LoginView.dart';
 import 'package:skills_over_flow_app/views/SignUpView.dart';
+import 'package:skills_over_flow_app/views/SpashView.dart';
+import 'package:skills_over_flow_app/views/usersView.dart';
 
 import 'helper/network/api.dart';
 
@@ -18,12 +20,13 @@ class SkillsOverFlowApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-
       routes: {
-        LoginView().id:(context) =>LoginView(),
-        SignUpView().id :(context) => SignUpView(),
+        const LoginView().id:(context) =>const LoginView(),
+        const SignUpView().id :(context) => const SignUpView(),
+        const SplashView().id :(context) =>const  SplashView(),
+        const userView().id:(context) => const userView()
       },
-      initialRoute: LoginView().id,
+      initialRoute: const userView().id,
       darkTheme: ThemeData(
       fontFamily: 'Jannat', // الخط الافتراضي للتطبيق
      textTheme:const TextTheme(
