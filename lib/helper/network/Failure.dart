@@ -33,7 +33,12 @@ class ServerFailure extends Failure{
         return ServerFailure('Connection Error with Api');
         break;
       case DioExceptionType.unknown:
-        return ServerFailure('UnExpected Error , Please try later');
+        if(dioException.message!.contains('SocketException')){
+          return ServerFailure('No Internet Connection');
+        }else{
+          return ServerFailure('UnExpected Error , Please try later');
+        }
+        
     default:
        return ServerFailure('Oops , there was an error , try later');
     }

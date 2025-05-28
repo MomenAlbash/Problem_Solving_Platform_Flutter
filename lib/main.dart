@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skills_over_flow_app/Simple_bloc_observer.dart';
+import 'package:skills_over_flow_app/views/ChangePasswordView.dart';
 import 'package:skills_over_flow_app/views/LoginView.dart';
 import 'package:skills_over_flow_app/views/SignUpView.dart';
 import 'package:skills_over_flow_app/views/SpashView.dart';
+import 'package:skills_over_flow_app/views/userInfoView.dart';
 import 'package:skills_over_flow_app/views/usersView.dart';
 
 import 'helper/network/api.dart';
@@ -24,9 +26,11 @@ class SkillsOverFlowApp extends StatelessWidget {
         const LoginView().id:(context) =>const LoginView(),
         const SignUpView().id :(context) => const SignUpView(),
         const SplashView().id :(context) =>const  SplashView(),
-        const userView().id:(context) => const userView()
+        const userView().id:(context) => const userView(),
+        const userInfoView().id:(context) => const userInfoView(),
+        const ChangePasswordView().id:(context) => const ChangePasswordView()
       },
-      initialRoute: const userView().id,
+      initialRoute: const ChangePasswordView().id,
       darkTheme: ThemeData(
       fontFamily: 'Jannat', // الخط الافتراضي للتطبيق
      textTheme:const TextTheme(

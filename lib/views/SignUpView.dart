@@ -8,6 +8,7 @@ import 'package:skills_over_flow_app/Widgets/CustomContainerWidget.dart';
 import 'package:skills_over_flow_app/Widgets/CustomTextFormFieldWidget.dart';
 import 'package:skills_over_flow_app/constants/AppDimensions.dart';
 import 'package:skills_over_flow_app/constants/AppSpacing.dart';
+import 'package:skills_over_flow_app/constants/AppValdiation.dart';
 import 'package:skills_over_flow_app/constants/color_constants.dart';
 import 'package:skills_over_flow_app/constants/AppTextStyle.dart';
 import 'package:skills_over_flow_app/cubits/user_Register_cubit/user_Register_cubit.dart';
@@ -117,13 +118,9 @@ class _SignUpViewState extends State<SignUpView> {
                       SizedBox(height: screenHeight *AppSpacing.medium,),
                       CustomTextFormFieldWidget(controller: usernameController,
                         hintText: 'Username*',
-                        validator:(value) {
-                          if(value!.isEmpty||value==null){
-                            return 'field is required';
-                          }else{
-                            return  null;
-                          }
-                        } ,
+                        validator:(value){
+                        AppValidation.passwordValidation(value);
+                        }
                         ),
                       CustomTextFormFieldWidget(controller: passwordController,
                           hintText: 'Password*',

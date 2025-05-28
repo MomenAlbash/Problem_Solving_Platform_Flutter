@@ -9,7 +9,7 @@ class Api {
   static init() {
     dio = Dio(
       BaseOptions(
-          baseUrl: 'http://testproj.runasp.net/api/',
+          baseUrl: 'http://problem-solving.runasp.net/api/',
           receiveDataWhenStatusError: true,
           headers: {
             'Content-Type': 'application/json',
