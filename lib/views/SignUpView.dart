@@ -6,11 +6,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:skills_over_flow_app/Components/Components.dart';
 import 'package:skills_over_flow_app/Widgets/CustomContainerWidget.dart';
 import 'package:skills_over_flow_app/Widgets/CustomTextFormFieldWidget.dart';
-import 'package:skills_over_flow_app/constants/AppDimensions.dart';
-import 'package:skills_over_flow_app/constants/AppSpacing.dart';
-import 'package:skills_over_flow_app/constants/AppValdiation.dart';
-import 'package:skills_over_flow_app/constants/color_constants.dart';
-import 'package:skills_over_flow_app/constants/AppTextStyle.dart';
+import 'package:skills_over_flow_app/utils/AppDimensions.dart';
+import 'package:skills_over_flow_app/utils/AppSpacing.dart';
+import 'package:skills_over_flow_app/utils/AppValdiation.dart';
+import 'package:skills_over_flow_app/utils/color_constants.dart';
+import 'package:skills_over_flow_app/utils/AppTextStyle.dart';
 import 'package:skills_over_flow_app/cubits/user_Register_cubit/user_Register_cubit.dart';
 
 class SignUpView extends StatefulWidget {

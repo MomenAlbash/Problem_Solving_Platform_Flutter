@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:skills_over_flow_app/Services/loginServices.dart';
+import 'package:skills_over_flow_app/Services/auth_services/loginServices.dart';
 
 part 'user_login_state.dart';
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:skills_over_flow_app/Widgets/CustomAppBar.dart';
-import 'package:skills_over_flow_app/constants/AppTextStyle.dart';
-import 'package:skills_over_flow_app/constants/color_constants.dart';
+import 'package:skills_over_flow_app/utils//AppTextStyle.dart';
+import 'package:skills_over_flow_app/utils//color_constants.dart';
+import 'package:skills_over_flow_app/utils/AppRouter.dart';
 
 class userInfoView extends StatelessWidget {
   const userInfoView({super.key});
@@ -102,7 +104,9 @@ class userInfoView extends StatelessWidget {
                 Container(
                   height: 70,
                   child: MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      GoRouter.of(context).push(AppRouter.changePasswordView);
+                    },
                     color: fieldColor,
                     child: Row(
                       children: [

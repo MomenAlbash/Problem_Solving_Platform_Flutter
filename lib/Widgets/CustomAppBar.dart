@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:skills_over_flow_app/constants/color_constants.dart';
+import 'package:go_router/go_router.dart';
+import 'package:skills_over_flow_app/utils//color_constants.dart';
+import 'package:skills_over_flow_app/utils/AppRouter.dart';
 
 class CustomAppBarUsersView extends StatelessWidget {
   const CustomAppBarUsersView({super.key});
@@ -15,7 +17,9 @@ class CustomAppBarUsersView extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               color: fieldColor,
             ),
-            child: IconButton(onPressed: (){}, icon:const Icon(Icons.filter_list_rounded,color: greyColor,))),
+            child: IconButton(onPressed: (){
+              GoRouter.of(context).push(AppRouter.homeView);
+            }, icon:const Icon(Icons.keyboard_return,color: greyColor,))),
         Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),

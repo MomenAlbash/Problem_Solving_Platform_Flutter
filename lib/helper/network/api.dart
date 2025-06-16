@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'Failure.dart';
+
 class Api {
   static late Dio dio;
 
@@ -82,27 +84,27 @@ class Api {
       throw Exception('Unknown error occurred');
     }
   }
-
   put(
       {required String url,
       @required dynamic body,
       @required String? token}) async {
     try {
       Map<String, String> headers = {};
-      headers.addAll({'Content-Type': 'application/x-www-form-urlencoded'});
       if (token != null) {
-        headers.addAll({'Authorization': 'Bearer $token'});
+        log(token+'a,d;');
+        headers.addAll({'Authorization':'Bearer $token'});
       }
       Response response = await dio.put(
         url,
         data: body,
         options: Options(headers: headers),
       );
-      return response.data;
-    } on DioException catch (e) {
-      throw Exception('there is a problem in status code ');
-    } catch (e) {
-      throw Exception('oops there is an error , try later');
+      return response;
+    } on DioException catch(e){
+      final errorMessage = e.response!.data['message'];
+      throw (errorMessage);
+    }catch(e){
+      return (ServerFailure(e.toString()));
     }
   }
 }

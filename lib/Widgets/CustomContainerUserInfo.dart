@@ -1,11 +1,13 @@
 
 import 'package:flutter/material.dart';
+import 'package:skills_over_flow_app/models/user_model.dart';
 
-import '../constants/AppTextStyle.dart';
-import '../constants/color_constants.dart';
+import '../utils//AppTextStyle.dart';
+import '../utils//color_constants.dart';
 
 class CustomContainerUserInfo extends StatelessWidget {
-  const CustomContainerUserInfo({super.key});
+  const CustomContainerUserInfo({required this.usermodel,super.key});
+  final userModel usermodel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,7 +35,7 @@ class CustomContainerUserInfo extends StatelessWidget {
               Row(
                 children: [
                   Text('User Name:',style: AppTextStyles.bodyText1(context, yellowColor),),
-                  Text(' momen_bash',style: AppTextStyles.bodyText1(context, yellowColor),),
+                  Text('${usermodel.userName}' ,style: AppTextStyles.bodyText1(context, yellowColor),),
                 ],
               ),
               const SizedBox(height: 5,),

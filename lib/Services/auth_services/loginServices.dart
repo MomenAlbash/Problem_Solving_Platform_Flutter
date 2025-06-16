@@ -2,10 +2,11 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:skills_over_flow_app/constants/info_constants.dart';
+import 'package:skills_over_flow_app/helper/CachHelper.dart';
+import 'package:skills_over_flow_app/utils//info_constants.dart';
 import 'package:skills_over_flow_app/helper/network/api.dart';
-import '../helper/network/Failure.dart';
-import '../helper/network/end_points/Auth_end_points.dart';
+import '../../helper/network/Failure.dart';
+import '../../helper/network/end_points/Auth_end_points.dart';
 
 class LoginServices {
   static Future<Either<Failure,String>> userLogin({
@@ -30,7 +31,9 @@ class LoginServices {
       log('Login response: ${response.data}');
       token=response.data['token'];
       log(token);
+      CacheHelper.saveData(key: 'isLogin', value: token);
       return right(response.data['message']);
+
     } on DioException catch(e){
       throw left(ServerFailure.FromDioExecption(e));
     }catch(e){

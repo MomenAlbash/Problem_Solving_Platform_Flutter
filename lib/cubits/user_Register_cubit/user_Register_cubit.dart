@@ -6,8 +6,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
-import 'package:skills_over_flow_app/Services/RegisterService.dart';
-import 'package:skills_over_flow_app/Services/loginServices.dart';
+import 'package:skills_over_flow_app/Services/auth_services/RegisterService.dart';
+import 'package:skills_over_flow_app/Services/auth_services/loginServices.dart';
 
 part 'user_Register_state.dart';
 

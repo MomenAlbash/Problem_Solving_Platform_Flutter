@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skills_over_flow_app/Widgets/CustomContainerWidget.dart';
 import 'package:skills_over_flow_app/Widgets/CustomTextFormFieldWidget.dart';
-import 'package:skills_over_flow_app/constants/AppDimensions.dart';
-import 'package:skills_over_flow_app/constants/AppSpacing.dart';
+import 'package:skills_over_flow_app/utils/AppDimensions.dart';
+import 'package:skills_over_flow_app/utils/AppSpacing.dart';
 import 'package:skills_over_flow_app/cubits/user_login_cubit/user_login_cubit.dart';
+import 'package:skills_over_flow_app/utils/AppValdiation.dart';
 import 'package:skills_over_flow_app/views/SignUpView.dart';
 import 'package:skills_over_flow_app/views/homeView.dart';
 
 import '../Components/Components.dart';
-import '../constants/color_constants.dart';
-import '../constants/AppTextStyle.dart';
+import '../utils//color_constants.dart';
+import '../utils//AppTextStyle.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -46,7 +47,7 @@ class _LoginViewState extends State<LoginView> {
         listener: (context, state) {
           if(state is UserLoginSuccessState){
             ShowToast(message: state.message, state: toastState.success);
-            Navigator.push(context, MaterialPageRoute(builder: (context) => homeView(),));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeView(),));
 
           }
           if(state is UserLoginFailureState){
@@ -90,8 +91,9 @@ class _LoginViewState extends State<LoginView> {
                       CustomTextFormFieldWidget(
                         hintText: 'Enter your username',
                         controller: usernameController,
-                        validator: (value) => value?.isEmpty ?? true ? 'field is required' : null,
+                        validator: AppValidation.passwordValidation,
                       ),
+                      const SizedBox(height: 10,),
                       CustomTextFormFieldWidget(
                         hintText: 'Enter your password',
                         suffixIcon:cubit.isVisible ?Icons.visibility: (Icons.visibility_outlined),
@@ -100,7 +102,7 @@ class _LoginViewState extends State<LoginView> {
                         },
                         controller: passwordController,
                         obscureText:cubit.isVisible ?false:true ,
-                        validator: (value) => value?.isEmpty ?? true ? 'field is required' : null,
+                        validator: AppValidation.passwordValidation,
                       ),
                       SizedBox(height: screenHeight *AppSpacing.large,),
                       if (state is UserLoginLoadingState)

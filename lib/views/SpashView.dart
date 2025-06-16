@@ -1,8 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:skills_over_flow_app/constants/AppTextStyle.dart';
-import 'package:skills_over_flow_app/constants/color_constants.dart';
+import 'package:go_router/go_router.dart';
+import 'package:skills_over_flow_app/helper/CachHelper.dart';
+import 'package:skills_over_flow_app/utils/AppRouter.dart';
 import 'package:skills_over_flow_app/views/LoginView.dart';
+
+import '../utils/AppTextStyle.dart';
+import '../utils/color_constants.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -13,7 +17,18 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    String? tokesdn=CacheHelper.getData(key: 'isLogin');
+    if(tokesdn!=null){
+      navigateToHome();
+    }else{
+      navigateToLogin();
+    }
 
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,5 +44,18 @@ class _SplashViewState extends State<SplashView> {
       ),
 
     );
+  }
+
+  void navigateToLogin() {
+
+    Future.delayed(const Duration(seconds: 2), () {
+      GoRouter.of(context).push(AppRouter.loginView);
+    });
+  }
+  void navigateToHome() {
+
+    Future.delayed(const Duration(seconds: 2), () {
+      GoRouter.of(context).push(AppRouter.homeView);
+    });
   }
 }

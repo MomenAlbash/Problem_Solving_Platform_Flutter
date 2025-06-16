@@ -4,7 +4,8 @@
 import 'package:dio/dio.dart';
 import 'package:skills_over_flow_app/helper/network/Failure.dart';
   import 'package:skills_over_flow_app/helper/network/api.dart';
-  import '../helper/network/end_points/Auth_end_points.dart';
+import 'package:skills_over_flow_app/utils/info_constants.dart';
+  import '../../helper/network/end_points/Auth_end_points.dart';
 
   class RegisterServices {
     static String message="";
@@ -38,6 +39,7 @@ import 'package:skills_over_flow_app/helper/network/Failure.dart';
           url: Register,
           body: body,
         );
+        token=response.data['token'];
         log('Register response: ${response.data}');
         message=response.data['message'];
         if (response.statusCode == 400) {
