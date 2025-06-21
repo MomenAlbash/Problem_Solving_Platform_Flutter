@@ -39,7 +39,9 @@ class CustomTextFormFieldWidget extends StatelessWidget {
         errorBorder: BorderBuilder(color: Colors.red),
         fillColor: fieldColor,
           hintText: hintText,
-          hintStyle:AppTextStyles.bodyText1(context,greyColor),
+          hintMaxLines: 1,
+
+          hintStyle:AppTextStyles.bodyText1(context,greyColor).copyWith(fontSize: 12),
           suffixIcon: IconButton(
             onPressed: onPressedICon,
             icon: Icon(suffixIcon,color: greyColor,size: 32,),

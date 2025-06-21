@@ -11,9 +11,15 @@ import '../../models/compiler_model.dart';
 
 class getAllProblemsservice{
 
-  Future<Either<Failure,List<problemsModel>>> getAllProblems()async {
+  Future<Either<Failure,List<problemsModel>>> getAllProblems(
+      {required int Page,required int limit, int? difficulty, String probelmName=''} )async {
     try {
-      var data = await Api().get(Url: allProblem);
+      late var data;
+      if(difficulty==null){
+         data = await Api().get(Url: allProblem+'?page=${Page}&limit=${limit}&title=${probelmName}' );
+      }else{
+         data = await Api().get(Url: allProblem+'?page=${Page}&limit=${limit}&difficulty=${difficulty}' );
+      }
       List<problemsModel> problemsList = [];
       for (var problem in data) {
         problemsList.add(

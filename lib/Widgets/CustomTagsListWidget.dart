@@ -4,7 +4,6 @@ import 'package:skills_over_flow_app/cubits/get_all_tags_cubit/get_all_tags_cubi
 import 'package:skills_over_flow_app/models/tag_model..dart';
 
 import 'CustomTagItem.dart';
-
 class CustomTagsWidget extends StatefulWidget {
   const CustomTagsWidget({super.key});
   @override
@@ -12,27 +11,30 @@ class CustomTagsWidget extends StatefulWidget {
 }
 
 class _CustomTagsWidgetState extends State<CustomTagsWidget> {
-  List<String> tags=[];
+  List<String> tags = [];
+
+  @override
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GetAllTagsCubit()..getAllTags(),
-      child: BlocBuilder<GetAllTagsCubit, GetAllTagsState>(
+    return
+       BlocBuilder<GetAllTagsCubit, GetAllTagsState>(
         builder: (context, state) {
-          var cubit= GetAllTagsCubit.get(context);
-          if(state is GetAllTagsLoadingState){
+          var cubit = GetAllTagsCubit.get(context);
+          if (state is GetAllTagsLoadingState) {
             return Center(child: CircularProgressIndicator(),);
-          }else if(state is GetAllTagsSuccessState){
+          } else if (state is GetAllTagsSuccessState) {
             return Wrap(
               spacing: 20.0, // المسافة الأفقية بين العناصر
               runSpacing: 10.0, // المسافة الرأسية بين الأسطر
-              children: List.generate(state.tags.length, (index) => CustomTagItem(tagmodel: state.tags[index])),
+              children: List.generate(state.tags.length, (index) =>
+                  CustomTagItem(tagmodel: state.tags[index])),
             );
-          }else{
+          } else {
             return const Center(child: Text('there are no tags , try again'));
           }
         },
-      ),
+
+
     );
   }
 }

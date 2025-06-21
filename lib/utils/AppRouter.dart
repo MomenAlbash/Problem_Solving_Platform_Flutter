@@ -2,6 +2,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:skills_over_flow_app/views/ChangePasswordView.dart';
 import 'package:skills_over_flow_app/views/LoginView.dart';
+import 'package:skills_over_flow_app/views/ProblemListAdminView.dart';
 import 'package:skills_over_flow_app/views/SignUpView.dart';
 import 'package:skills_over_flow_app/views/SpashView.dart';
 import 'package:skills_over_flow_app/views/addProblemView.dart';
@@ -20,11 +21,12 @@ abstract class AppRouter{
   static const changePasswordView='/changePasswordView';
   static const usersView='/usersView';
   static const addProblemView='/addProblemView';
+  static const problemListAdminView='/problemListAdminView';
   static final router = GoRouter(
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const AddProblemView(),
+        builder: (context, state) => const ProblemListAdminView(),
       ),
       GoRoute(
         path: loginView,

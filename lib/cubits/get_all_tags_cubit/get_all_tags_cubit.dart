@@ -11,13 +11,14 @@ class GetAllTagsCubit extends Cubit<GetAllTagsState> {
   GetAllTagsCubit() : super(GetAllTagsInitial());
   static GetAllTagsCubit get(context)=>BlocProvider.of(context);
   Future<void> getAllTags() async {
-    emit(GetAllTagsLoadingState());
-    var response = await TagServices().getAllTags();
-    response.fold((failure) {
-      emit(GetAllTagsFailureState(failure.errorMessage));
-    }, (tags) {
-      emit(GetAllTagsSuccessState(tags));
-    });
+      emit(GetAllTagsLoadingState());
+      var response = await TagServices().getAllTags();
+      response.fold((failure) {
+        emit(GetAllTagsFailureState(failure.errorMessage));
+      }, (tags) {
+        emit(GetAllTagsSuccessState(tags));
+      });
+
   }
 
 

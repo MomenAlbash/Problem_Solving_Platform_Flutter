@@ -1,17 +1,14 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skills_over_flow_app/Services/compiler_Services/get_all_compiler_Service.dart';
-import 'package:skills_over_flow_app/Widgets/CustomTextFormFieldWidget.dart';
-import 'package:skills_over_flow_app/cubits/choose_tag_cubit/choose_tag_cubit.dart';
-import 'package:skills_over_flow_app/cubits/get_all_comiplers_cubit/get_all_compilers_cubit.dart';
-import 'package:skills_over_flow_app/utils/AppTextStyle.dart';
+import 'package:skills_over_flow_app/Widgets/CustomTagsListWidget.dart';
 
-import '../models/compiler_model.dart';
+import '../cubits/get_all_comiplers_cubit/get_all_compilers_cubit.dart';
+import '../cubits/get_all_tags_cubit/get_all_tags_cubit.dart';
+import '../utils/AppTextStyle.dart';
 import '../utils/color_constants.dart';
 import 'CustomDropDownButton.dart';
-import 'CustomTagsListWidget.dart';
+import 'CustomTagItem.dart';
+import 'CustomTextFormFieldWidget.dart';
 
 class SolutionAddProblemBody extends StatefulWidget {
   final Function(String, String, List<int> tags)? onDataChanged;
@@ -24,97 +21,92 @@ class SolutionAddProblemBody extends StatefulWidget {
 
 class _SolutionAddProblemBodyState extends State<SolutionAddProblemBody> {
   final TextEditingController solutionController = TextEditingController();
-  int selectedDifficultyIndex=0;
+  int selectedDifficultyIndex = 0;
   List<String> CompilersName = [];
   List<int> tags = [];
+
+  @override
   void dispose() {
     solutionController.dispose();
     super.dispose();
   }
 
   void _saveData(List<String>? compilersName) {
-    CompilersName=compilersName!;
-    if(compilersName!=null){
-      widget.onDataChanged?.call(
-          CompilersName![selectedDifficultyIndex],
-          solutionController.text,
-          tags);
-    }else{
-      widget.onDataChanged?.call(
-          'sdmos',
-          solutionController.text,
-          tags);
-    }
+    CompilersName = compilersName ?? [];
+    widget.onDataChanged?.call(
+      CompilersName.isNotEmpty ? CompilersName[selectedDifficultyIndex] : 'sdmos',
+      solutionController.text,
+      tags,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: BlocProvider(
-        create: (context) => GetAllCompilersCubit()..getAllCompilers(),
-        child: BlocBuilder<GetAllCompilersCubit, GetAllCompilersState>(
-          builder: (context, state) {
-            var cubit = GetAllCompilersCubit.get(context);
-            return Column(
-              children: [
-                Row(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => GetAllCompilersCubit()..getAllCompilers(),
+        ),
+        BlocProvider(
+          create: (context) => GetAllTagsCubit()..getAllTags(),
+        ),
+      ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            // جزء Compiler Name
+            BlocBuilder<GetAllCompilersCubit, GetAllCompilersState>(
+              builder: (context, state) {
+                var compilersCubit = GetAllCompilersCubit.get(context);
+                return Row(
                   children: [
                     Text(
                       'Compiler Name',
                       style: AppTextStyles.bodyText1(context, yellowColor),
                     ),
-                    const SizedBox(
-                      width: 20,
-                    ),
+                    const SizedBox(width: 20),
                     (state is GetAllCompilersSuccessfullyState)
                         ? Expanded(
-                            child: CustomDropDownButton(
-                            items: state.compilersName,
-                            onChanged: (int index) {
-                              setState(() {
-                                selectedDifficultyIndex =
-                                    index; // حفظ الـ index عند التغيير
-                              });
-                              _saveData(state.compilersName);
-                            },
-                          ))
-                        : Expanded(
-                            child: Center(child: CircularProgressIndicator())),
+                      child: CustomDropDownButton(
+                        items: state.compilersName,
+                        onChanged: (int index) {
+                          setState(() {
+                            selectedDifficultyIndex = index;
+                          });
+                          _saveData(state.compilersName);
+                        },
+                      ),
+                    )
+                        : const Expanded(
+                        child: Center(child: CircularProgressIndicator())),
                   ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'Solution',
-                  style: AppTextStyles.bodyText1(context, yellowColor),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                CustomTextFormFieldWidget(
-                  controller: solutionController,
-                  hintText: 'Solution Code',
-                  minLines: 4,
-                  onChanged:(_)=>_saveData(null),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'Tags',
-                  style: AppTextStyles.bodyText1(context, yellowColor),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const CustomTagsWidget(),
-              ],
-            );
-          },
+                );
+              },
+            ),
+            const SizedBox(height: 20),
+            // جزء Solution
+            Text(
+              'Solution',
+              style: AppTextStyles.bodyText1(context, yellowColor),
+            ),
+            const SizedBox(height: 5),
+            CustomTextFormFieldWidget(
+              controller: solutionController,
+              hintText: 'Solution Code',
+              minLines: 4,
+              onChanged: (_) => _saveData(null),
+            ),
+            const SizedBox(height: 20),
+            // جزء Tags
+            Text(
+              'Tags',
+              style: AppTextStyles.bodyText1(context, yellowColor),
+            ),
+            const SizedBox(height: 5),
+            CustomTagsWidget()
+          ],
         ),
       ),
     );
   }
-
 }

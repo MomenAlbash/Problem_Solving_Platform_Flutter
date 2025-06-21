@@ -2,7 +2,7 @@ import 'package:skills_over_flow_app/models/problem_model.dart';
 import 'package:skills_over_flow_app/models/tag_model..dart';
 
 class problemsModel{
-  final String problemID;
+  final int problemID;
   final String title;
   final String generalDescription;
   final String diffculty;
@@ -19,7 +19,9 @@ class problemsModel{
       problemID: json['problemID'],
       generalDescription: json['generalDescription'],
       diffculty: json['difficulty'],
-      tags: json['tags'],
+      tags: (json['tags'] as List<dynamic>)
+          .map((tagJson) => tagModel.fromjson(tagJson))
+          .toList(),
       solutionsCount: json['solutionsCount'],
       attemptsCount: json['attemptsCount']
     );

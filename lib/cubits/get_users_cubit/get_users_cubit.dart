@@ -11,7 +11,7 @@ class GetUsersCubit extends Cubit<GetUsersState> {
 
   static GetUsersCubit get(context) => BlocProvider.of(context);
   int page= 1 ;
-  Future<void> getAllUsers({ String userName='',required bool isIncrease, bool isFirstTime=false}) async {
+    Future<void> getAllUsers({ String userName='',required bool isIncrease, bool isFirstTime=false}) async {
     if(isFirstTime){
       page=1;
     }else{
